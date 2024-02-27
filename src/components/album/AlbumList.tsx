@@ -2,13 +2,10 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import type { RootState } from "../../app/store";
-import { useSelector, useDispatch } from "react-redux";
+
+import { useDispatch } from "react-redux";
 import { deleteAlbumName } from "../../features/albumNameSlice";
-const AlbumList = () => {
-  const albumNames = useSelector(
-    (state: RootState) => state.albumName.albumNames
-  );
+const AlbumList = ({ albumNames }: { albumNames: string[] }) => {
   const dispatch = useDispatch();
   const albumDeleteHandler = (name: string) => {
     const updatedAlbumName = albumNames.filter((item) => item !== name); //일치하지 않는값들만 true를 주어 새로운 배열을 만듦

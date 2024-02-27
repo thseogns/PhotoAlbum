@@ -3,16 +3,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
-export interface DisplayState {
+export interface AlbumState {
   albumNames: string[];
+  images: { image: { imgName: string; date: string } }[];
 }
 
-const initialState: DisplayState = {
+const initialState: AlbumState = {
   albumNames: [],
+  images: [{ image: { imgName: "", date: "" } }],
 };
 
 export const albumNameSlice = createSlice({
-  name: "display",
+  name: "album",
   initialState,
   reducers: {
     albumName: (state, action: PayloadAction<string>) => {
