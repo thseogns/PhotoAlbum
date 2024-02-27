@@ -8,7 +8,7 @@ const Album = ({ albumName }: { albumName: string }) => {
   const [selectedFile, setSelectedFile] = React.useState<File | null>(null);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files !== null && selectedFile !== null) {
+    if (event.target.files !== null) {
       //널값이 아닐때만 작동
       const file = event.target.files[0];
       setSelectedFile(file);
