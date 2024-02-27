@@ -1,5 +1,7 @@
 <!-- @format -->
 
+제작중인 네트리파이 주소: https://photoalbumproject.netlify.app/
+
 웹은 각잡고한다. = 정리, 노트, 정보찾기, 분류 등
 
 영화, 사진?
