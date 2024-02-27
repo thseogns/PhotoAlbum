@@ -1,24 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+/**
+ * @format
+ * @jsxImportSource @emotion/react
+ */
+
+import React from "react";
+import "./App.css";
+import { Routes, Route } from "react-router-dom";
+import AddAlbum from "./components/AddAlbum";
+import AlbumList from "./components/album/AlbumList";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AddAlbum />
+      <AlbumList />
+      <Routes>
+        <Route path="/" element></Route>
+        <Route path="/2"></Route>
+      </Routes>
     </div>
   );
 }
