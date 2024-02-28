@@ -9,7 +9,7 @@ const AddAlbum = () => {
     (state: RootState) => state.albumName.albumNames
   );
   const dispatch = useDispatch();
-  const [inputValue, setInputValue] = React.useState<string>("");
+  const [inputValue, setInputValue] = React.useState<string>(" ");
   //실시간으로 할 필요가 없다. 그러니 서브밋에서 보내자.
   const submitAlbumHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
