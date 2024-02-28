@@ -16,12 +16,14 @@ const AlbumList = ({ albumNames }: { albumNames: string[] }) => {
   return (
     <div>
       {albumNames.map((name) => (
-        <label>
-          <Link to={name}>{name}</Link>
-          <button onClick={albumDeleteHandler.bind(null, name)}>삭제!</button>
-          {/*
+        <div>
+          <label>
+            <Link to={name}>{name}</Link>
+            <button onClick={albumDeleteHandler.bind(null, name)}>삭제!</button>
+            {/*
           bind를 사용해서 함수호출을 줄이자*/}
-        </label>
+          </label>
+        </div>
       ))}
     </div>
   );

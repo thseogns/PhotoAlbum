@@ -17,9 +17,10 @@ export const albumNameSlice = createSlice({
   name: "album",
   initialState,
   reducers: {
-    albumName: (state, action: PayloadAction<string>) => {
+    updateAlbumName: (state, action: PayloadAction<string>) => {
       state.albumNames = [action.payload, ...state.albumNames];
     },
+
     updateImage: (
       state,
       action: PayloadAction<{
@@ -35,7 +36,7 @@ export const albumNameSlice = createSlice({
   },
 });
 //액션 사용용도
-export const { albumName, deleteAlbumName, updateImage } =
+export const { updateAlbumName, deleteAlbumName, updateImage } =
   albumNameSlice.actions;
 //스토어로 보냄
 export default albumNameSlice.reducer;
