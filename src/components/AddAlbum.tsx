@@ -4,6 +4,7 @@ import React from "react";
 import type { RootState } from "../app/store";
 import { useSelector, useDispatch } from "react-redux";
 import { updateAlbumName } from "../features/albumNameSlice";
+
 const AddAlbum = () => {
   const albumNames = useSelector(
     (state: RootState) => state.albumName.albumNames
@@ -15,6 +16,7 @@ const AddAlbum = () => {
     e.preventDefault();
     console.log(updateAlbumName);
     setInputValue(" ");
+
     if (inputValue === " ") return; // 공백이면 추가하지 않는다.
     // 같은이름은 추가하지 않는다.
     if (albumNames.includes(inputValue)) {

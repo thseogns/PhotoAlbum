@@ -21,22 +21,12 @@ export const albumNameSlice = createSlice({
       state.albumNames = [action.payload, ...state.albumNames];
     },
 
-    updateImage: (
-      state,
-      action: PayloadAction<{
-        alt: string;
-        image: { imgName: string; date: string };
-      }>
-    ) => {
-      state.images = [action.payload, ...state.images];
-    },
     deleteAlbumName: (state, action: PayloadAction<string[]>) => {
       state.albumNames = action.payload;
     },
   },
 });
 //액션 사용용도
-export const { updateAlbumName, deleteAlbumName, updateImage } =
-  albumNameSlice.actions;
+export const { updateAlbumName, deleteAlbumName } = albumNameSlice.actions;
 //스토어로 보냄
 export default albumNameSlice.reducer;

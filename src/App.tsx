@@ -16,6 +16,7 @@ function App() {
   const albumNames = useSelector(
     (state: RootState) => state.albumName.albumNames
   );
+
   return (
     <div className="App">
       <AddAlbum />
