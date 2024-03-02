@@ -1,20 +1,49 @@
 /** @format */
 
 import React from "react";
-import type { RootState } from "../app/store";
-import { useSelector, useDispatch } from "react-redux";
-import { collection, addDoc } from "firebase/firestore";
-
+import { useDispatch } from "react-redux";
+import { albumName } from "../features/albumNameSlice";
+import { getDatabase, ref, set, child, get } from "firebase/database";
 const AddAlbum = () => {
-  const albums = useSelector((state: RootState) => state.albumName.images);
-  const dispatch = useDispatch();
   const [inputValue, setInputValue] = React.useState<string>(" ");
+  const dispatch = useDispatch();
+  const db = getDatabase();
+  const albumRef = ref(db, "albums");
+
+  const albumNameRander = async () => {
+    const albumNameSnapshot = await get(albumRef);
+    const keys: string[] = [];
+    albumNameSnapshot.forEach((childSnapshot) => {
+      const key = childSnapshot.key;
+      keys.push(key);
+    });
+    dispatch(albumName(keys));
+  };
+  React.useEffect(() => {
+    albumNameRander();
+  }, []);
+
   //실시간으로 할 필요가 없다. 그러니 서브밋에서 보내자.
   const submitAlbumHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (inputValue === " ") return; // 공백이면 추가하지 않는다.
-    // 같은이름은 추가하지 않는다.
+
+    const snapshot = await get(child(albumRef, inputValue));
+
+    if (!snapshot.exists()) {
+      // 중복된 값이 없으면 추가
+      set(ref(db, "albums/" + inputValue), "");
+      // 앨범 추가가 완료된 후에 앨범 목록을 다시 가져옴
+      albumNameRander();
+    } else {
+      return alert("이미존재하는 앨범이름입니다.");
+    }
+    snapshot.forEach((childSnapshot) => {
+      const key = childSnapshot.key;
+
+      console.log("키 값:", key);
+    });
   };
 
   return (
