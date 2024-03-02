@@ -13,21 +13,18 @@ import AlbumList from "./components/album/AlbumList";
 import Album from "./components/album/Album";
 
 function App() {
-  const albumNames = useSelector(
-    (state: RootState) => state.albumName.albumNames
-  );
-
+  const albums = useSelector((state: RootState) => state.albumName.images);
   return (
     <div className="App">
       <AddAlbum />
-      <AlbumList albumNames={albumNames} />
+      <AlbumList albums={albums} />
       <Routes>
-        {albumNames &&
-          albumNames.map((albumName) => (
+        {albums &&
+          albums.map((album) => (
             <Route
-              key={albumName}
-              path={`/${albumName}`}
-              element={<Album albumName={albumName} />}
+              key={album.albumName}
+              path={`/${album.albumName}`}
+              element={<Album album={album} />}
             />
           ))}
       </Routes>

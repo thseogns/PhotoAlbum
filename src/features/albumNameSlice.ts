@@ -2,31 +2,44 @@
 
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-
 export interface AlbumState {
-  albumNames: string[];
-  images: { alt: string; image: { imgName: string; date: string } }[];
+  images: { albumName: string; alt: string; imageUrl: string }[];
 }
 
 const initialState: AlbumState = {
-  albumNames: [],
-  images: [{ alt: "", image: { imgName: "", date: "" } }],
+  images: [{ albumName: "", alt: "", imageUrl: "" }],
 };
 
 export const albumNameSlice = createSlice({
   name: "album",
   initialState,
   reducers: {
-    updateAlbumName: (state, action: PayloadAction<string>) => {
-      state.albumNames = [action.payload, ...state.albumNames];
+    uploadAlbumImage: (
+      state,
+      action: PayloadAction<{
+        albumName: string;
+        alt: string;
+        imageUrl: string;
+      }>
+    ) => {
+      state.images = [action.payload];
     },
 
-    deleteAlbumName: (state, action: PayloadAction<string[]>) => {
-      state.albumNames = action.payload;
+    deleteAlbumName: (
+      state,
+      action: PayloadAction<
+        {
+          albumName: string;
+          alt: string;
+          imageUrl: string;
+        }[]
+      >
+    ) => {
+      state.images = action.payload;
     },
   },
 });
 //액션 사용용도
-export const { updateAlbumName, deleteAlbumName } = albumNameSlice.actions;
+export const { deleteAlbumName, uploadAlbumImage } = albumNameSlice.actions;
 //스토어로 보냄
 export default albumNameSlice.reducer;

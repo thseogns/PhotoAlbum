@@ -3,19 +3,22 @@
 import React from "react";
 import { v4 as uuidv4 } from "uuid"; //아이디를 생성해서 저장하기
 import AlbumBox from "./AlbumBox";
-
-import {
-  ref,
-  uploadBytes,
-  uploadString,
-  getDownloadURL,
-} from "firebase/storage";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../../app/firebase/firebase";
+import { useDispatch } from "react-redux";
+import { uploadAlbumImage } from "../../features/albumNameSlice";
 
-const Album = ({ albumName }: { albumName: string }) => {
+const Album = ({
+  album,
+}: {
+  album: { albumName: string; alt: string; imageUrl: string };
+}) => {
   const [selectedFile, setSelectedFile] = React.useState<File | null>(null);
   const [imageUrl, setImageUrl] = React.useState<string>("");
   const [image, setImage] = React.useState("");
+
+  const dispatch = useDispatch();
+
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files !== null) {
       // 업로드 된 file
@@ -29,20 +32,25 @@ const Album = ({ albumName }: { albumName: string }) => {
     const name = uuidv4();
     if (selectedFile === null) return;
     const uploadImageName = `${name}-${selectedFile.name}`; //같은 이미지저장을 위한 랜덤네임 지정
-    const albumRef = ref(storage, `${albumName}/${uploadImageName}`);
+    const albumRef = ref(storage, `${album.albumName}/${uploadImageName}`);
     const uploadTask = uploadBytes(albumRef, selectedFile);
+
     uploadTask.then((res) =>
       getDownloadURL(res.ref).then((downloadUrl) => {
         console.log(downloadUrl);
+        //url가져옴
         setImageUrl(downloadUrl);
+
+        // dispatch(uploadAlbumImage(imageInfo));
         setImage(downloadUrl);
       })
     );
   };
+
   return (
     <>
-      <div>앨범이름 : {albumName}</div>
-      <AlbumBox selectedFile={selectedFile} />
+      <div>앨범이름 : {album.albumName}</div>
+      <AlbumBox album={album} />
       <label>
         <input type="file" onChange={handleFileChange} />
         <button onClick={handleUpload}>업로드</button>
