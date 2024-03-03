@@ -29,6 +29,14 @@ const AddAlbum = () => {
   const submitAlbumHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setInputValue("");
+    const hasSpecialCharacters = /[.#$/[\]]/.test(inputValue);
+
+    if (hasSpecialCharacters) {
+      alert(
+        "앨범 이름에는 다음과같은 특수 문자를 사용할 수 없습니다.( /[.#$/[]]/)"
+      );
+      return;
+    }
     if (inputValue === " ") return; // 공백이면 추가하지 않는다.
 
     const snapshot = await get(child(albumRef, inputValue));
