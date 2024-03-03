@@ -7,7 +7,7 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../../app/firebase/firebase";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../app/store";
-import { uploadAlbumImage } from "../../features/albumNameSlice";
+// import { uploadAlbumImage } from "../../features/albumNameSlice";
 
 const Album = ({ albumName }: { albumName: string }) => {
   const [selectedFile, setSelectedFile] = React.useState<File | null>(null);

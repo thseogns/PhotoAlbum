@@ -2,28 +2,18 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import { RootState } from "../../app/store";
+import { RootState, AppDispatch } from "../../app/store";
 import { useDispatch, useSelector } from "react-redux";
 import { getDatabase, ref, remove, get } from "firebase/database";
-
-import { albumName } from "../../features/albumNameSlice";
+import { fetchAlbumName } from "../../features/albumNameSlice";
+// import { albumName } from "../../features/albumNameSlice";
 
 const AlbumList = () => {
-  const db = getDatabase();
-  const albumRef = ref(db, "albums");
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const albumNames = useSelector(
-    (state: RootState) => state.albumName.albumName
+    (state: RootState) => state.albumName.albumNames
   );
-  const albumNameRander = async () => {
-    const albumNameSnapshot = await get(albumRef);
-    const keys: string[] = [];
-    albumNameSnapshot.forEach((childSnapshot) => {
-      const key = childSnapshot.key;
-      keys.push(key);
-    });
-    dispatch(albumName(keys));
-  };
+  const albums = useSelector((state: RootState) => state.albumName.loading);
 
   const albumDeleteHandler = async (name: string) => {
     //나중에 만들자
@@ -33,12 +23,13 @@ const AlbumList = () => {
       await remove(ref(db, `albums/${name}`));
       console.log(`앨범 "${name}" 삭제됨`);
 
-      albumNameRander();
+      //한번더 새로고침
+      dispatch(fetchAlbumName());
     } catch (error: any) {
       console.error("앨범 삭제 중 오류 발생:", error.message);
     }
   };
-  console.log("이건무슨값?", albumNames);
+  console.log("이건무슨값?", albums);
   return (
     <div>
       {albumNames.map((albumName) => (

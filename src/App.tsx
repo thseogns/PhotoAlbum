@@ -14,8 +14,10 @@ import Album from "./components/album/Album";
 
 function App() {
   const albumNames = useSelector(
-    (state: RootState) => state.albumName.albumName
+    (state: RootState) => state.albumName.albumNames
   );
+  //실험
+
   return (
     <div className="App">
       <AddAlbum />

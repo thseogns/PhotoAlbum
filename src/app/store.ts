@@ -2,10 +2,13 @@
 
 import { configureStore } from "@reduxjs/toolkit";
 import albumNameSlice from "../features/albumNameSlice";
+import albumSlice from "../features/albumSlice";
 export const store = configureStore({
   reducer: {
     albumName: albumNameSlice,
+    album: albumSlice,
   },
+  devTools: true,
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
