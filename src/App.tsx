@@ -11,11 +11,14 @@ import { Routes, Route } from "react-router-dom";
 import AddAlbum from "./components/AddAlbum";
 import AlbumList from "./components/album/AlbumList";
 import Album from "./components/album/Album";
+import HomePage from "./components/HomePage";
 
 function App() {
   const albumNames = useSelector(
     (state: RootState) => state.albumName.albumNames
   );
+  const isLoading = useSelector((state: RootState) => state.albumName.loading);
+  console.log(isLoading);
   //실험
 
   return (
@@ -23,6 +26,7 @@ function App() {
       <AddAlbum />
       <AlbumList />
       <Routes>
+        <Route path="/" element={<HomePage />} />
         {albumNames &&
           albumNames.map((albumName) => (
             <Route
