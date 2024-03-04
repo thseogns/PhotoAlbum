@@ -2,11 +2,16 @@
 
 import React from "react";
 
-const ImageBox = () => {
+const ImageBox = ({ albums }: { albums: string[] }) => {
   return (
     <div>
       <div>앨범 이미지</div>
-      {/* {album && <img alt={} src={} />} */}
+      {albums &&
+        albums.map((albumImage, index) => (
+          <div key={index}>
+            <img alt={albumImage} src={albumImage} />
+          </div>
+        ))}
     </div>
   );
 };

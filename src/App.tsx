@@ -18,13 +18,14 @@ function App() {
     (state: RootState) => state.albumName.albumNames
   );
   const isLoading = useSelector((state: RootState) => state.albumName.loading);
-  console.log(isLoading);
+
   //실험
 
   return (
     <div className="App">
       <AddAlbum />
       <AlbumList />
+
       <Routes>
         <Route path="/" element={<HomePage />} />
         {albumNames &&

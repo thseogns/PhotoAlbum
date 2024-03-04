@@ -4,28 +4,17 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../app/store";
 import { fetchAlbumName } from "../features/albumNameSlice";
-// import { albumName } from "../features/albumNameSlice";
 import { getDatabase, ref, set, child, get } from "firebase/database";
 const AddAlbum = () => {
   const [inputValue, setInputValue] = React.useState<string>(" ");
   const dispatch = useDispatch<AppDispatch>();
   const db = getDatabase();
   const albumRef = ref(db, "albums");
-
-  // const albumNameRander = async () => {
-  //   const albumNameSnapshot = await get(albumRef);
-  //   const keys: string[] = [];
-  //   albumNameSnapshot.forEach((childSnapshot) => {
-  //     const key = childSnapshot.key;
-  //     keys.push(key);
-  //   });
-  //   // dispatch(albumName(keys));
-  // };
+  //실행시 시작
   React.useEffect(() => {
     dispatch(fetchAlbumName());
   }, []);
 
-  //실시간으로 할 필요가 없다. 그러니 서브밋에서 보내자.
   const submitAlbumHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setInputValue("");
@@ -52,8 +41,6 @@ const AddAlbum = () => {
     }
     snapshot.forEach((childSnapshot) => {
       const key = childSnapshot.key;
-
-      console.log("키 값:", key);
     });
   };
 
