@@ -1,12 +1,11 @@
 /** @format */
 
 import { configureStore } from "@reduxjs/toolkit";
-import albumNameSlice from "../features/albumNameSlice";
 import albumSlice from "../features/albumSlice";
+
 export const store = configureStore({
   reducer: {
-    albumName: albumNameSlice,
-    album: albumSlice,
+    albumName: albumSlice,
   },
   devTools: true,
 });

@@ -3,7 +3,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../app/store";
-import { fetchAlbumName } from "../features/albumNameSlice";
+import { fetchAlbumName } from "../features/albumSlice";
 import { getDatabase, ref, set, child, get } from "firebase/database";
 const AddAlbum = () => {
   const [inputValue, setInputValue] = React.useState<string>(" ");

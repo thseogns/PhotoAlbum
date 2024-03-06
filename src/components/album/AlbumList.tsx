@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { RootState, AppDispatch } from "../../app/store";
 import { useDispatch, useSelector } from "react-redux";
 import { getDatabase, ref, remove, get } from "firebase/database";
-import { fetchAlbumName } from "../../features/albumNameSlice";
+import { fetchAlbumName } from "../../features/albumSlice";
 
 const AlbumList = () => {
   const dispatch = useDispatch<AppDispatch>();

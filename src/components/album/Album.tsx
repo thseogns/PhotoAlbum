@@ -21,7 +21,7 @@ import { storage } from "../../app/firebase/firebase";
 //redux toolkit
 import { RootState, AppDispatch } from "../../app/store";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchAlbumImage, fetchAlbumName } from "../../features/albumNameSlice";
+import { fetchAlbumImage, fetchAlbumName } from "../../features/albumSlice";
 
 const Album = ({ albumName }: { albumName: string }) => {
   const [selectedFile, setSelectedFile] = React.useState<File | null>(null);
@@ -41,7 +41,8 @@ const Album = ({ albumName }: { albumName: string }) => {
     }
   };
 
-  const handleUpload = async () => {
+  const handleUpload = async (e: React.MouseEvent) => {
+    e.preventDefault();
     const name = uuidv4();
     if (selectedFile === null) return;
     const uploadImageName = `${name}-${selectedFile.name}`; //같은 이미지저장을 위한 랜덤네임 지정
@@ -60,6 +61,7 @@ const Album = ({ albumName }: { albumName: string }) => {
         dispatch(fetchAlbumName());
       })
     );
+    setSelectedFile(null);
   };
 
   return (
