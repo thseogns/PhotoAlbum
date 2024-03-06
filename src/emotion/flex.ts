@@ -20,3 +20,7 @@ export const justifyCenter = css`
 export const flexColumn = css`
   flex-direction: column;
 `;
+export const flexBetween = css`
+  display: flex;
+  justify-content: space-between;
+`;

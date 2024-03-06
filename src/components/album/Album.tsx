@@ -1,6 +1,8 @@
 /** @format */
+/** @jsxImportSource @emotion/react */
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { css } from "@emotion/react";
 import { v4 as uuidv4 } from "uuid"; //아이디를 생성해서 저장하기
 import AlbumBox from "./AlbumBox";
 
@@ -63,15 +65,24 @@ const Album = ({ albumName }: { albumName: string }) => {
     );
     setSelectedFile(null);
   };
+  //Emotion Style
+  const stikyBottom = css`
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    background-color: white;
+    padding: 0 5%;
+  `;
 
   return (
     <>
-      <div>앨범이름 : {albumName}</div>
-      <AlbumBox albums={albums} />
-      <label>
-        <input type="file" onChange={handleFileChange} />
-        <button onClick={handleUpload}>업로드</button>
-      </label>
+      <AlbumBox albumName={albumName} albums={albums} />
+      <div css={stikyBottom}>
+        <label>
+          <input type="file" onChange={handleFileChange} />
+          <button onClick={handleUpload}>업로드</button>
+        </label>
+      </div>
     </>
   );
 };

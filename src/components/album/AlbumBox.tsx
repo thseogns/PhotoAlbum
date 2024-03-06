@@ -1,23 +1,50 @@
 /** @format */
-
+/** @jsxImportSource @emotion/react */
 import React from "react";
+import { css } from "@emotion/react";
 import { RootState } from "../../app/store";
-
 import { useSelector } from "react-redux";
-const ImageBox = ({ albums }: { albums: string[] }) => {
+import { gridColonm3 } from "../../emotion/grid";
+const ImageBox = ({
+  albumName,
+  albums,
+}: {
+  albumName: string;
+  albums: string[];
+}) => {
   const isloading = useSelector((state: RootState) => state.albumName.loading);
 
-  if (isloading) return <div>로딩중 입니다...</div>;
-
+  //Emotion Style
+  const albumCover = css`
+    width: 90%;
+    margin: auto;
+  `;
+  const album = css`
+    width: 90%;
+    margin: auto;
+    gap: 10px;
+  `;
+  const albumImageCover = css`
+    border: 1px solid #aaaaaa;
+    border-radius: 10px;
+    overflow: hidden;
+  `;
+  const albumImageStyle = css`
+    width: 100%;
+    height: 100%;
+  `;
+  if (isloading) return <div css={albumCover}>로딩중 입니다...</div>;
   return (
-    <div>
-      <div>앨범 이미지</div>
-      {albums &&
-        albums.map((albumImage, index) => (
-          <div key={index}>
-            <img alt={albumImage} src={albumImage} />
-          </div>
-        ))}
+    <div css={albumCover}>
+      <div>앨범이름 : {albumName}</div>
+      <div css={[gridColonm3, album]}>
+        {albums &&
+          albums.map((albumImage, index) => (
+            <div key={index} css={albumImageCover}>
+              <img alt={albumImage} src={albumImage} css={albumImageStyle} />
+            </div>
+          ))}
+      </div>
     </div>
   );
 };

@@ -17,7 +17,7 @@ const AlbumList = () => {
   const albums = useSelector((state: RootState) => state.albumName.loading);
   //삭제기능
   const albumDeleteHandler = async (name: string) => {
-    const result = window.confirm("클릭하시겠습니까?");
+    const result = window.confirm("앨범을 삭제하시겠습니까?");
     if (result) {
       alert("앨범이 삭제되었습니다.");
     } else {
@@ -43,7 +43,7 @@ const AlbumList = () => {
     gap: 10px;
   `;
   const albumButtonCover = css`
-    margin: 20px 0;
+    margin: 10px 0;
   `;
   const albumButton = css`
     padding: 10px;
@@ -69,8 +69,6 @@ const AlbumList = () => {
                 x
               </button>
             </div>
-            {/*
-          bind를 사용해서 함수호출을 줄이자*/}
           </div>
         </div>
       ))}

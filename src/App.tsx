@@ -1,31 +1,23 @@
 /**
- * @format
- * @jsxImportSource @emotion/react
+  @format
  */
-
 import React from "react";
 import "./App.css";
 import type { RootState } from "./app/store";
 import { useSelector } from "react-redux";
 import { Routes, Route } from "react-router-dom";
-import AddAlbum from "./components/AddAlbum";
-import AlbumList from "./components/album/AlbumList";
 import Album from "./components/album/Album";
 import HomePage from "./components/HomePage";
+import Header from "./components/header/Header";
 
 function App() {
   const albumNames = useSelector(
     (state: RootState) => state.albumName.albumNames
   );
-  const isLoading = useSelector((state: RootState) => state.albumName.loading);
-
-  //실험
 
   return (
     <div className="App">
-      <AddAlbum />
-      <AlbumList />
-
+      <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
         {albumNames &&
