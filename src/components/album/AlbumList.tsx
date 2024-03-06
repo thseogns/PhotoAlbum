@@ -1,21 +1,29 @@
 /** @format */
-
+/** @jsxImportSource @emotion/react */
+import React from "react";
+import { css } from "@emotion/react";
 import { Link, useNavigate } from "react-router-dom";
 import { RootState, AppDispatch } from "../../app/store";
 import { useDispatch, useSelector } from "react-redux";
 import { getDatabase, ref, remove, get } from "firebase/database";
 import { fetchAlbumName } from "../../features/albumSlice";
-
+import { flex, flexCenter } from "../../emotion/flex";
 const AlbumList = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const albumNames = useSelector(
     (state: RootState) => state.albumName.albumNames
   );
-  const navigate = useNavigate();
-
   const albums = useSelector((state: RootState) => state.albumName.loading);
   //삭제기능
   const albumDeleteHandler = async (name: string) => {
+    const result = window.confirm("클릭하시겠습니까?");
+    if (result) {
+      alert("앨범이 삭제되었습니다.");
+    } else {
+      alert("삭제를 취소했습니다.");
+      return;
+    }
     //나중에 만들자
     const db = getDatabase();
     try {
@@ -30,20 +38,40 @@ const AlbumList = () => {
     }
     navigate("/");
   };
+  //Emotion Style
+  const albumList = css`
+    gap: 10px;
+  `;
+  const albumButtonCover = css`
+    margin: 20px 0;
+  `;
+  const albumButton = css`
+    padding: 10px;
+  `;
+
+  const deleteButton = css`
+    cursor: pointer;
+  `;
 
   return (
-    <div>
+    <div css={[flex, albumList]}>
       {albumNames.map((albumName) => (
-        <div key={albumName}>
-          <label>
-            <Link to={`${albumName}`}>{albumName}</Link>
-            <button onClick={albumDeleteHandler.bind(null, albumName)}>
-              삭제!
-            </button>
-
+        <div key={albumName} css={albumButtonCover}>
+          <div css={flex}>
+            <Link to={`${albumName}`} css={albumButton}>
+              {albumName}
+            </Link>
+            <div css={[flexCenter]}>
+              <button
+                css={deleteButton}
+                onClick={albumDeleteHandler.bind(null, albumName)}
+              >
+                x
+              </button>
+            </div>
             {/*
           bind를 사용해서 함수호출을 줄이자*/}
-          </label>
+          </div>
         </div>
       ))}
     </div>
