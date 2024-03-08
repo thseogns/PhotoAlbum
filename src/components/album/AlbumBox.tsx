@@ -33,20 +33,24 @@ const ImageBox = ({
     width: 100%;
     height: 100%;
   `;
-  if (isloading) return <div css={albumCover}>로딩중 입니다...</div>;
+
   return (
     <div css={albumCover}>
-      <div css={[gridColonm3, album]}>
-        {albums.length ? (
-          albums.map((albumImage, index) => (
-            <div key={index} css={albumImageCover}>
-              <img alt={albumImage} src={albumImage} css={albumImageStyle} />
-            </div>
-          ))
-        ) : (
-          <div>사진이 없어요!</div>
-        )}
-      </div>
+      {isloading ? (
+        <div css={albumCover}>로딩중 입니다...</div>
+      ) : (
+        <div css={[gridColonm3, album]}>
+          {albums.length ? (
+            albums.map((albumImage, index) => (
+              <div key={index} css={albumImageCover}>
+                <img alt={albumImage} src={albumImage} css={albumImageStyle} />
+              </div>
+            ))
+          ) : (
+            <div>사진이 없어요!</div>
+          )}
+        </div>
+      )}
     </div>
   );
 };
