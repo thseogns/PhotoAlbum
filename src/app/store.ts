@@ -2,10 +2,11 @@
 
 import { configureStore } from "@reduxjs/toolkit";
 import albumSlice from "../features/albumSlice";
-
+import displaySlice from "../features/displaySlice";
 export const store = configureStore({
   reducer: {
     albumName: albumSlice,
+    display: displaySlice,
   },
   devTools: true,
 });
