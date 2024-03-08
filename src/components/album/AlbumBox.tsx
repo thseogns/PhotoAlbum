@@ -37,12 +37,15 @@ const ImageBox = ({
   return (
     <div css={albumCover}>
       <div css={[gridColonm3, album]}>
-        {albums &&
+        {albums.length ? (
           albums.map((albumImage, index) => (
             <div key={index} css={albumImageCover}>
               <img alt={albumImage} src={albumImage} css={albumImageStyle} />
             </div>
-          ))}
+          ))
+        ) : (
+          <div>비어있는 앨범입니다.</div>
+        )}
       </div>
     </div>
   );
