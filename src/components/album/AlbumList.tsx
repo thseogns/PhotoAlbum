@@ -12,7 +12,7 @@ const AlbumList = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const albumNames = useSelector(
-    (state: RootState) => state.albumName.albumImages
+    (state: RootState) => state.albumName.albumNames
   );
   const albums = useSelector((state: RootState) => state.albumName.loading);
   //삭제기능
