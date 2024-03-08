@@ -27,7 +27,7 @@ const AddAlbum = () => {
       );
       return;
     }
-    if (trimInputValue === "") return; // 공백이면 추가하지 않는다.
+    if (trimInputValue === "") return alert("공백은 추가할 수 없습니다."); // 공백이면 추가하지 않는다.
 
     const snapshot = await get(child(albumRef, trimInputValue));
 
