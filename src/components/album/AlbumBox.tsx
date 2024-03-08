@@ -36,7 +36,6 @@ const ImageBox = ({
   if (isloading) return <div css={albumCover}>로딩중 입니다...</div>;
   return (
     <div css={albumCover}>
-      <div>앨범이름 : {albumName}</div>
       <div css={[gridColonm3, album]}>
         {albums &&
           albums.map((albumImage, index) => (
