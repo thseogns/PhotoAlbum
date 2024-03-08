@@ -24,6 +24,7 @@ const fetchAlbumNames = async () => {
   }
 };
 //이미지값 받아오기
+
 const fetchAlbumImages = async (albumName: string) => {
   try {
     const nameResponse = await axios.get(
@@ -41,6 +42,7 @@ const fetchAlbumImages = async (albumName: string) => {
     throw new Error("데이터를 가져오는 중 오류가 발생했습니다.");
   }
 };
+const loadSnapShot = () => {};
 export const fetchAlbumImage = createAsyncThunk(
   "albumImage/fetchAlbumImages",
   async (albumName: string) => {

@@ -6,7 +6,7 @@ import { AppDispatch } from "../../app/store";
 import { fetchAlbumName } from "../../features/albumSlice";
 import { getDatabase, ref, set, child, get } from "firebase/database";
 const AddAlbum = () => {
-  const [inputValue, setInputValue] = React.useState<string>(" ");
+  const [inputValue, setInputValue] = React.useState<string>("");
   const dispatch = useDispatch<AppDispatch>();
   const db = getDatabase();
   const albumRef = ref(db, "albums");
@@ -18,6 +18,7 @@ const AddAlbum = () => {
   const submitAlbumHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setInputValue("");
+    const trimInputValue = inputValue.trim();
     const hasSpecialCharacters = /[.#$/[\]]/.test(inputValue);
 
     if (hasSpecialCharacters) {
@@ -26,13 +27,13 @@ const AddAlbum = () => {
       );
       return;
     }
-    if (inputValue === " ") return; // 공백이면 추가하지 않는다.
+    if (trimInputValue === "") return; // 공백이면 추가하지 않는다.
 
-    const snapshot = await get(child(albumRef, inputValue));
+    const snapshot = await get(child(albumRef, trimInputValue));
 
     if (!snapshot.exists()) {
       // 중복된 값이 없으면 추가
-      set(ref(db, "albums/" + inputValue), "");
+      set(ref(db, "albums/" + trimInputValue), "");
       // 앨범 추가가 완료된 후에 앨범 목록을 다시 가져옴
       // albumNameRander(); 디스패치 한번더
       dispatch(fetchAlbumName());
