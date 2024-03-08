@@ -44,7 +44,7 @@ const ImageBox = ({
             </div>
           ))
         ) : (
-          <div>사진이 없어요!.</div>
+          <div>사진이 없어요!</div>
         )}
       </div>
     </div>
