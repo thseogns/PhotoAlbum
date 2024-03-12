@@ -40,9 +40,6 @@ const AddAlbum = () => {
     } else {
       return alert("이미존재하는 앨범이름입니다.");
     }
-    snapshot.forEach((childSnapshot) => {
-      const key = childSnapshot.key;
-    });
   };
 
   return (
