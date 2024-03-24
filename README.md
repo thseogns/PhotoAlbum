@@ -13,7 +13,8 @@
 
 앨범추가시 db에 있는 이름과 비교하여 같은이름이 있을때 경고가 표시되도록 하였습니다.  ![image](https://github.com/thseogns/PhotoAlbum/assets/99688960/543b5e00-1a13-4196-9aa0-e65bae40e4cf)   
   
-특수문자 입력시 경고가 표시됩니다.   ![image](https://github.com/thseogns/PhotoAlbum/assets/99688960/35d3e11c-1635-49d8-a119-807f0ee2151f)   
+특수문자 입력시 경고가 표시됩니다.   
+![image](https://github.com/thseogns/PhotoAlbum/assets/99688960/35d3e11c-1635-49d8-a119-807f0ee2151f)   
   
 실수로 삭제하는 일이 없도록 경고 메시지를 띄우게 하였습니다.   
 ![image](https://github.com/thseogns/PhotoAlbum/assets/99688960/a629936b-ad84-4837-b309-8e961b922abe)   
