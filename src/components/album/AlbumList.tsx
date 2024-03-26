@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getDatabase, ref, remove, get } from "firebase/database";
 import { fetchAlbumName } from "../../features/albumSlice";
 import { flex, flexCenter } from "../../emotion/flex";
+import { grid, gridColonm3 } from "../../emotion/grid";
 import { display } from "../../features/displaySlice";
 const AlbumList = () => {
   const navigate = useNavigate();
@@ -48,27 +49,39 @@ const AlbumList = () => {
   //Emotion Style
   const albumList = css`
     gap: 15px;
+    margin-bottom: 15px;
+    @media (max-width: 520px) {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+    }
   `;
   const albumButtonCover = css`
     margin: 10px 0;
     padding: 8px 18px;
     border-radius: 50px;
+    @media (max-width: 520px) {
+      margin: 0;
+      padding: 0;
+    }
   `;
   const noneClcikAlbumButtonCover = css`
     border: 1px solid #fdededec;
 
     &:hover {
-      background-color: #ffd0d0eb;
+      background-color: #d2aaffeb;
       color: #9e9d9d;
     }
   `;
   const clickAlbumButtonCover = css`
-    background-color: #ff9595eb;
+    background-color: #9d68ffeb;
     color: white;
   `;
 
   const albumButton = css`
     padding: 10px;
+    @media (max-width: 520px) {
+      padding: 10px 5px 10px 10px;
+    }
   `;
 
   const deleteButton = css`
@@ -76,9 +89,13 @@ const AlbumList = () => {
     height: 30px;
     border-radius: 50%;
     border: none;
-    padding: 15px;
-    background-color: #ffebeb;
+
+    background-color: #d3c8fd;
     cursor: pointer;
+    @media (max-width: 520px) {
+      width: 25px;
+      height: 25px;
+    }
   `;
 
   return (

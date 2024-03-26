@@ -1,10 +1,13 @@
 /** @format */
+/** @jsxImportSource @emotion/react */
 
 import React from "react";
+import { css } from "@emotion/react";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../app/store";
 import { fetchAlbumName } from "../../features/albumSlice";
 import { getDatabase, ref, set, child, get } from "firebase/database";
+import { flex, flexColumn } from "../../emotion/flex";
 const AddAlbum = () => {
   const [inputValue, setInputValue] = React.useState<string>("");
   const dispatch = useDispatch<AppDispatch>();
@@ -41,20 +44,58 @@ const AddAlbum = () => {
       return alert("이미존재하는 앨범이름입니다.");
     }
   };
+  //styles
+  const addAlbumCover = css`
+    margin-bottom: 15px;
+  `;
+  const albumTitle = css`
+    margin: 25px 0;
+    color: #8049ff;
+    text-shadow: 0 0 2px #bebcbced;
+  `;
+  const addAlbumInput = css`
+    background-color: #bebebeed;
+    border: none;
+    height: 30px;
+    width: 500px;
+    border-radius: 5px 0 0 5px;
+    padding-left: 13px;
+    outline: none;
 
+    ::placeholder {
+      color: #777777;
+    }
+    @media (max-width: 520px) {
+      width: 250px;
+    }
+  `;
+  const addAlbumButton = css`
+    width: 30px;
+    height: 30px;
+    border: 1px solid #eeee;
+    border-radius: 0 5px 5px 0;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+  `;
   return (
-    <form onSubmit={submitAlbumHandler}>
-      <label>
-        <div>앨범이름 추가</div>
-        <input
-          type="text"
-          placeholder="앨범추가하기"
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-        />
-      </label>
-      <button type="submit">추가하기</button>
-    </form>
+    <div css={addAlbumCover}>
+      <h1 css={albumTitle}>PhotoAlbum</h1>
+      <form css={[flex]} onSubmit={submitAlbumHandler}>
+        <label>
+          <input
+            css={addAlbumInput}
+            type="text"
+            placeholder="앨범이름을 입력해주세요"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+          />
+        </label>
+        <button css={addAlbumButton} type="submit">
+          +
+        </button>
+      </form>
+    </div>
   );
 };
 

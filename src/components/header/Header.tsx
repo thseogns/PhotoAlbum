@@ -16,15 +16,27 @@ const Header = () => {
     left: 0;
     background-color: white;
   `;
-
+  const homeImageCover = css`
+    margin-top: 40px;
+  `;
+  const homeImage = css`
+    width: 25px;
+    height: 25px;
+  `;
   return (
     <div css={[stickyTop, flexBetween]}>
       <div>
         <AddAlbum />
         <AlbumList />
       </div>
-      <div>
-        <Link to="/">홈으로</Link>
+      <div css={homeImageCover}>
+        <Link to="/">
+          <img
+            css={homeImage}
+            alt="home"
+            src={`${process.env.PUBLIC_URL}/homeImage.jpg`}
+          />
+        </Link>
       </div>
     </div>
   );

@@ -33,7 +33,7 @@ const Album = ({ albumName }: { albumName: string }) => {
 
   useEffect(() => {
     dispatch(fetchAlbumImage(albumName));
-  }, [albumName]);
+  }, [albumName, dispatch]);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files !== null) {
@@ -76,7 +76,7 @@ const Album = ({ albumName }: { albumName: string }) => {
 
   return (
     <>
-      <AlbumBox albumName={albumName} albums={albums} />
+      <AlbumBox albums={albums} />
       <div css={stikyBottom}>
         <label>
           <input type="file" onChange={handleFileChange} />

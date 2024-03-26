@@ -7,5 +7,8 @@ export const grid = css`
 
 export const gridColonm3 = css`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  @media (max-width: 520px) {
+    grid-template-columns: 1fr 1fr;
+  }
 `;

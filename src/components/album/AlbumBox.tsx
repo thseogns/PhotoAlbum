@@ -5,13 +5,7 @@ import { css } from "@emotion/react";
 import { RootState } from "../../app/store";
 import { useSelector } from "react-redux";
 import { gridColonm3 } from "../../emotion/grid";
-const ImageBox = ({
-  albumName,
-  albums,
-}: {
-  albumName: string;
-  albums: string[];
-}) => {
+const ImageBox = ({ albums }: { albums: string[] }) => {
   const isloading = useSelector((state: RootState) => state.albumName.loading);
 
   //Emotion Style
@@ -28,10 +22,15 @@ const ImageBox = ({
     border: 1px solid #aaaaaa;
     border-radius: 10px;
     overflow: hidden;
+    height: 35vh;
+    @media (max-width: 520px) {
+      height: 14vh;
+    }
   `;
   const albumImageStyle = css`
     width: 100%;
     height: 100%;
+    object-fit: cover;
   `;
 
   return (
